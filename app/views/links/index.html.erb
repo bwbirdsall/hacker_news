@@ -6,25 +6,13 @@
 
 <ul>
   <% @links.each do |link| %>
-    <li><%= link_to link.description, link_path(link) %>
-    <span class="smalltext">Score: <%= link.votes.length %></span>
-    <span class="inline"><%= form_for(link.votes.new) do |f| %>
-      <span class="form-group">
-        <%= f.hidden_field :link_id, :value => link.id %>
-      </span>
-      <%= f.submit(:class => "btn btn-info btn-xs", :value => "↑") %>
-    <% end %></span>
-    <% if !Vote.find_by(:link_id => link.id).nil? %>
-      <span class="inline"><%= form_for(link.votes.new, :url => vote_path(Vote.find_by(:link_id => link.id)), :html => { :method => :delete } ) do |f| %>
-        <span class="form-group">
-          <%= f.hidden_field :link_id, :value => link.id %>
-        </span>
-        <%= f.submit(:class => "btn btn-danger btn-xs", :value => "↓") %>
-      <% end %></span>
-    <% end %>
-      <span class="redstuff">
-    [ <%= link_to "X", link_path(link), :confirm => "Are you certain?", :method => "delete" %> ]</span>
-  </li>
+    <li>
+      <%= link_to link.description, link_path(link) %>
+      <span class="smalltext">Score: <%= link.score %> | Votes: <%= link.votes_count %></span>
+      <% @link = link %>
+      <%= render "vote_buttons" %>
+      <span class="redstuff">[ <%= link_to "X", link_path(link), :confirm => "Are you certain?", :method => "delete" %> ]</span>
+    </li>
   <% end %>
 </ul>
-<%= link_to "Submit New Link", new_link_path, :class => "btn btn-danger" %>
+<%= link_to "Submit New Link", new_link_path, :class => "btn btn-info" %>

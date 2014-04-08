@@ -1,6 +1,7 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.order(:votes_count => :desc)
+    @links = Link.sorted
+    @link = Link.new
   end
 
   def new

@@ -1,0 +1,18 @@
+<span class="inline">
+  <%= form_for(@link.votes.new) do |f| %>
+    <span class="form-group">
+      <%= f.hidden_field :link_id, :value => @link.id %>
+    </span>
+    <%= f.submit(:class => "btn btn-success btn-xs", :value => "↑") %>
+  <% end %>
+</span>
+<% if !Vote.find_by(:link_id => @link.id).nil? %>
+  <span class="inline">
+    <%= form_for(@link.votes.new, :url => vote_path(Vote.find_by(:link_id => @link.id)), :html => { :method => :delete } ) do |f| %>
+      <span class="form-group">
+        <%= f.hidden_field :link_id, :value => @link.id %>
+      </span>
+      <%= f.submit(:class => "btn btn-danger btn-xs", :value => "↓") %>
+    <% end %>
+  </span>
+<% end %>
