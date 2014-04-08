@@ -1,0 +1,23 @@
+<% content_for(:title, "Link Submit | HackerNewsHacked") %>
+
+<h1 class="jumbotron">Submit a New Link</h1>
+<br>
+<p><%= form_for(@link) do |f| %>
+  <div class="form-group">
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+  <div class="form-group">
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+  <%= f.submit(:class => "btn btn-success") %>
+<% end %>
+</p>
+
+<%= link_to "Return to homepage", links_path, :class => "btn btn-warning btn-xs" %>
+

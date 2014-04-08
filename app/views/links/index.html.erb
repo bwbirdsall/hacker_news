@@ -1,0 +1,16 @@
+<% content_for(:title, "Links | HackerNewsHacked") %>
+
+<h1 class="jumbotron">Links</h1>
+
+<h2>All Links</h2>
+
+<ul>
+  <% @links.each do |link| %>
+    <li><%= link_to link.description, link_path(link) %>
+    <span class="redstuff">
+    [ <%= link_to "X", link_path(link), :confirm => "Are you certain?", :method => "delete" %> ]</span>
+  </li>
+  <% end %>
+</ul>
+
+<%= link_to "Submit New Link", new_link_path, :class => "btn btn-danger" %>
