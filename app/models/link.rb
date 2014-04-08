@@ -1,7 +1,6 @@
 class Link < ActiveRecord::Base
   has_many :comments, as: :commentable
   has_many :votes
-  belongs_to :user
   validates :url, presence: true
   validates :description, presence: true
 

@@ -6,10 +6,8 @@ class CommentsController < ApplicationController
       if (parent.class.name == "Link")
         redirect_to :back
       else
-        link = nil
-        until !link.nil?
+        until parent.class.name == "Link"
           parent = parent.commentable
-          link = (parent.class.name == "Link")
         end
         redirect_to link_path(parent.id)
       end

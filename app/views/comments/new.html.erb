@@ -1,5 +1,5 @@
 <% content_for(:title, "Create New Comment") %>
 
 <h1 class="jumbotron">Create New Comment</h1>
-
+<h4><b>Reply To:</b> <%= @parent.text %></h4>
 <%= render "/links/comment_form", :object => @parent %>
