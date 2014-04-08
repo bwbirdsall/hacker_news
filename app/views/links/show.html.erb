@@ -1,5 +1,49 @@
 <% content_for(:title, "Link | HackerNewsHacked") %>
 
 <h1 class="jumbotron"><%= link_to @link.description, @link.url, :target => '_blank' %></h1>
+<span class="smalltext">Created on <%= @link.created_at.strftime("%B %d, %Y") %> at <%= @link.created_at.strftime("%I:%M %P") %></span>
+
+<p>Votes: <%= @link.votes.length %></p>
+  <span class="inline"><%= form_for(@link.votes.new) do |f| %>
+      <span class="form-group">
+        <%= f.hidden_field :link_id, :value => @link.id %>
+      </span>
+      <%= f.submit(:class => "btn btn-info btn-xs", :value => "↑") %>
+    <% end %></span>
+    <% if !Vote.find_by(:link_id => @link.id).nil? %>
+      <span class="inline"><%= form_for(@link.votes.new, :url => vote_path(Vote.find_by(:link_id => @link.id)), :html => { :method => :delete } ) do |f| %>
+        <span class="form-group">
+          <%= f.hidden_field :link_id, :value => @link.id %>
+        </span>
+        <%= f.submit(:class => "btn btn-danger btn-xs", :value => "↓") %>
+      <% end %></span>
+    <% end %>
+
+<h2>Comments:</h2>
+<ul>
+  <% @link.comments.each do |comment| %>
+    <li><%= comment.text %>
+        <br><span class="smalltext">on <%= comment.created_at.strftime("%B %d, %Y") %> at <%= comment.created_at.strftime("%I:%M %P") %></span></li>
+  <% end %>
+</ul>
+
+<h2>Submit a new comment</h2>
+<br>
+<p><%= form_for(@link.comments.new) do |f| %>
+  <div class="form-group">
+    <%= f.hidden_field :link_id, :value => @link.id %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="form-group">
+    <%= f.label :text %>
+    <br>
+    <%= f.text_area :text, cols: 60, rows: 10 %>
+  </div>
+  <%= f.submit(:class => "btn btn-success") %>
+<% end %>
+</p>
 
 <%= link_to "Return to homepage", links_path, :class => "btn btn-warning btn-xs" %>

@@ -23,3 +23,11 @@
   color: firebrick;
   font-weight: 600;
 }
+
+.smalltext {
+  color: darkgray;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.inline form { display: inline; }
