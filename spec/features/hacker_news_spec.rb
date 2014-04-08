@@ -77,7 +77,7 @@ feature "voting" do
     fill_in "User", with: 1
     click_button "Create Link"
     click_button "↑"
-    page.should have_content "Score: 1"
+    page.should have_content "Score: 11"
   end
   scenario "downvoting decreases a link's score" do
     visit root_path
@@ -90,6 +90,6 @@ feature "voting" do
     click_button "↑"
     click_button "↑"
     click_button "↓"
-    page.should have_content "Score: 2"
+    page.should have_content "Score: 12"
   end
 end

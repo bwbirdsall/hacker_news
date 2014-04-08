@@ -1,0 +1,18 @@
+<%= form_for(object.comments.new) do |f| %>
+  <div class="form-group">
+    <%= f.hidden_field :commentable_id, :value => object.id %>
+  </div>
+  <div class="form-group">
+    <%= f.hidden_field :commentable_type, :value => "#{object.class}" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="form-group">
+    <%= f.label :text %>
+    <br>
+    <%= f.text_area :text, cols: 60, rows: 10 %>
+  </div>
+  <%= f.submit(:class => "btn btn-info") %>
+<% end %>

@@ -1,0 +1,9 @@
+<li>
+  <%= object.text %>
+  <br><span class="smalltext">on <%= object.created_at.strftime("%B %d, %Y") %> at <%= object.created_at.strftime("%I:%M %P") %> <%= link_to "Comment on this", new_comment_path(:parent_id => object.id) %></span>
+  <ul>
+    <% object.comments.each do |c| %>
+      <%= render "comments", :object => c %>
+    <% end %>
+  </ul>
+</li>

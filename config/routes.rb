@@ -3,7 +3,7 @@ HackerNews::Application.routes.draw do
 
   resources :links, :except => [:edit, :update]
 
-  resources :comments, :except => [:new, :show, :destroy]
+  resources :comments, :except => [:show, :destroy, :edit, :update]
 
   resources :votes, :only => [:create, :destroy]
 
